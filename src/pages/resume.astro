@@ -17,11 +17,16 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
   path="/resume/"
 >
   <div class="resume-toolbar shell">
-    <p>Web resume · Optimized for screen readers and printing</p>
-    <button class="button button--secondary" type="button" data-print-resume>
-      Print or save as PDF
+    <p>Web resume · Original PDF available</p>
+    <a
+      class="button button--secondary"
+      href="/divyanshu-aggarwal-original-resume.pdf"
+      target="_blank"
+      rel="noopener"
+    >
+      Open original resume PDF
       <span aria-hidden="true">↗</span>
-    </button>
+    </a>
   </div>
 
   <article class="resume-document" aria-labelledby="resume-name">
@@ -162,10 +167,4 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       </aside>
     </div>
   </article>
-
-  <script>
-    document.querySelector("[data-print-resume]")?.addEventListener("click", () => {
-      window.print();
-    });
-  </script>
 </BaseLayout>
