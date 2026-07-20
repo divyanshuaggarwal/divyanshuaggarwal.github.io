@@ -1,14 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#f3efe6"/>
-  <circle cx="1060" cy="92" r="220" fill="#dce4d8"/>
-  <circle cx="1092" cy="75" r="112" fill="#b54f36"/>
-  <path d="M0 510H1200" stroke="#17332d" stroke-opacity=".28"/>
-  <path d="M920 0V630" stroke="#17332d" stroke-opacity=".18"/>
-  <circle cx="1056" cy="520" r="48" fill="none" stroke="#17332d" stroke-width="2"/>
-  <text x="1041" y="530" fill="#17332d" font-family="Georgia, serif" font-size="30" font-style="italic">DA</text>
-  <text x="84" y="104" fill="#8d3826" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="4">APPLIED SCIENTIST · NLP RESEARCHER</text>
-  <text x="78" y="260" fill="#17332d" font-family="Georgia, serif" font-size="78">Divyanshu</text>
-  <text x="78" y="346" fill="#17332d" font-family="Georgia, serif" font-size="78">Aggarwal</text>
-  <text x="84" y="430" fill="#425a54" font-family="Arial, sans-serif" font-size="27">LLM adaptation · Multilingual learning · Evaluation</text>
-  <text x="84" y="563" fill="#6f7d78" font-family="Arial, sans-serif" font-size="19" letter-spacing="1.5">DIVYANSHUAGGARWAL.GITHUB.IO</text>
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <path d="M84 92H1116" stroke="#d8dee4" stroke-width="2"/>
+  <path d="M84 538H1116" stroke="#7a2434" stroke-width="6"/>
+  <text x="84" y="178" fill="#57606a" font-family="Arial, sans-serif" font-size="21" font-weight="700" letter-spacing="3">APPLIED SCIENTIST 2 · MICROSOFT</text>
+  <text x="80" y="302" fill="#24292f" font-family="Arial, sans-serif" font-size="78" font-weight="700">Divyanshu Aggarwal</text>
+  <text x="84" y="382" fill="#57606a" font-family="Arial, sans-serif" font-size="28">Language-model adaptation · Multilingual learning · Evaluation</text>
+  <text x="84" y="493" fill="#6e7781" font-family="Arial, sans-serif" font-size="20">divyanshuaggarwal.github.io</text>
 </svg>

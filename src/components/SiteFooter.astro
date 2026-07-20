@@ -7,37 +7,22 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="shell footer-grid">
-    <div>
-      <p class="footer-name">{site.name}</p>
-      <p class="footer-note">
-        Applied scientist and NLP researcher.<br />
-        Views expressed here are my own.
-      </p>
-    </div>
-
-    <div class="footer-contact">
-      <p class="eyebrow">Elsewhere</p>
-      <ul class="footer-links" aria-label="Profile links">
-        {
-          site.profiles.slice(0, 4).map((profile) => (
-            <li>
-              <a
-                href={profile.href}
-                target={profile.kind === "email" ? undefined : "_blank"}
-                rel={profile.kind === "email" ? undefined : "me noopener noreferrer"}
-              >
-                {profile.label}
-                {profile.kind !== "email" && <ExternalArrow />}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-
-    <p class="footer-meta">
-      © {year} {site.name}<br />
-      Built with Astro.
-    </p>
+    <p class="footer-note">© {year} {site.name}. Views expressed here are my own.</p>
+    <ul class="footer-links" aria-label="Profile links">
+      {
+        site.profiles.slice(0, 4).map((profile) => (
+          <li>
+            <a
+              href={profile.href}
+              target={profile.kind === "email" ? undefined : "_blank"}
+              rel={profile.kind === "email" ? undefined : "me noopener noreferrer"}
+            >
+              {profile.label}
+              {profile.kind !== "email" && <ExternalArrow />}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </footer>
