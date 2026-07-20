@@ -1,0 +1,30 @@
+---
+import ExternalArrow from "@/components/ExternalArrow.astro";
+import { site } from "@/data/site";
+
+interface Props {
+  includeX?: boolean;
+}
+
+const { includeX = false } = Astro.props;
+const profiles = includeX
+  ? site.profiles
+  : site.profiles.filter((profile) => profile.kind !== "x");
+---
+
+<ul class="social-links" aria-label="Professional profiles">
+  {
+    profiles.map((profile) => (
+      <li>
+        <a
+          href={profile.href}
+          target={profile.kind === "email" ? undefined : "_blank"}
+          rel={profile.kind === "email" ? undefined : "me noopener noreferrer"}
+        >
+          {profile.label}
+          {profile.kind !== "email" && <ExternalArrow />}
+        </a>
+      </li>
+    ))
+  }
+</ul>

@@ -1,0 +1,49 @@
+---
+import ExternalArrow from "@/components/ExternalArrow.astro";
+import type { ExperienceEntry } from "@/data/experience";
+
+interface Props {
+  entries: ExperienceEntry[];
+  compact?: boolean;
+}
+
+const { entries, compact = false } = Astro.props;
+---
+
+<div class:list={["timeline", { "timeline--compact": compact }]}>
+  {
+    entries.map((entry) => (
+      <article class="timeline-item">
+        <div class="timeline-period">
+          <p>{entry.period}</p>
+          <span>{entry.location}</span>
+        </div>
+        <div class="timeline-content">
+          <p class="timeline-role">{entry.role}</p>
+          <h3>
+            {
+              entry.href ? (
+                <a href={entry.href} target="_blank" rel="noopener noreferrer">
+                  {entry.organization}
+                  <ExternalArrow />
+                </a>
+              ) : (
+                entry.organization
+              )
+            }
+          </h3>
+          {entry.team && <p class="timeline-team">{entry.team}</p>}
+          <p class="timeline-summary">{entry.summary}</p>
+          {entry.highlights.length > 0 && (
+            <ul class="timeline-highlights">
+              {entry.highlights.map((highlight) => <li>{highlight}</li>)}
+            </ul>
+          )}
+          <ul class="topic-list timeline-tags" aria-label={`${entry.organization} focus areas`}>
+            {entry.tags.map((tag) => <li>{tag}</li>)}
+          </ul>
+        </div>
+      </article>
+    ))
+  }
+</div>

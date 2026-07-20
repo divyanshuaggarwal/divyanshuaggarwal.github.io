@@ -1,0 +1,196 @@
+---
+import { Image } from "astro:assets";
+import OpenSourceCard from "@/components/OpenSourceCard.astro";
+import PublicationCard from "@/components/PublicationCard.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import SocialLinks from "@/components/SocialLinks.astro";
+import { news, researchThemes } from "@/data/profile";
+import { openSourceContributions } from "@/data/openSource";
+import { featuredPublications } from "@/data/publications";
+import { site } from "@/data/site";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import profileImage from "@/assets/profile.jpg";
+---
+
+<BaseLayout>
+  <section class="hero shell">
+    <div class="hero-copy">
+      <p class="eyebrow hero-eyebrow">Applied Scientist 2 · Microsoft</p>
+      <h1>
+        Building language models that adapt
+        <em>across languages, domains, and constraints.</em>
+      </h1>
+      <p class="hero-summary">
+        I’m Divyanshu Aggarwal, an applied scientist and NLP researcher. My work spans
+        efficient model adaptation and distillation, multilingual and continual learning,
+        and rigorous evaluation.
+      </p>
+
+      <div class="hero-actions">
+        <a class="button button--primary" href="/research/">
+          Explore my research
+          <span aria-hidden="true">→</span>
+        </a>
+        <a class="button button--secondary" href={site.resume}>
+          Read my resume
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <SocialLinks />
+    </div>
+
+    <div class="hero-portrait">
+      <div class="portrait-frame">
+        <Image
+          src={profileImage}
+          alt="Portrait of Divyanshu Aggarwal"
+          width={560}
+          height={747}
+          format="webp"
+          quality={86}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="portrait-caption">
+        <span>{site.location}</span>
+        <span>LLM adaptation · Multilingual NLP</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="profile-strip" aria-label="Profile highlights">
+    <div class="shell profile-facts">
+      <div>
+        <strong>10</strong>
+        <span>Research publications</span>
+      </div>
+      <div>
+        <strong>ACL · EMNLP · NAACL</strong>
+        <span>Recent publication venues</span>
+      </div>
+      <div>
+        <strong>5</strong>
+        <span>Open-source projects contributed to</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell" id="focus">
+    <SectionHeading
+      eyebrow="Research focus"
+      title="Teaching models new capabilities—efficiently and responsibly."
+      description="I work across algorithms, evaluation, and systems, with a recurring focus on making language models useful beyond their original languages and training distributions."
+    />
+
+    <div class="theme-grid">
+      {
+        researchThemes.map((theme) => (
+          <article class="theme-card">
+            <p class="theme-number">{theme.number}</p>
+            <h3>{theme.title}</h3>
+            <p>{theme.description}</p>
+            <ul class="theme-keywords" aria-label={`${theme.title} topics`}>
+              {theme.keywords.map((keyword) => <li>{keyword}</li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="shell">
+      <SectionHeading
+        eyebrow="Selected research"
+        title="Recent work"
+        description="Research on multilingual adaptation, continual learning, efficient finetuning, and language-model evaluation."
+        actionLabel="View all publications"
+        actionHref="/research/"
+      />
+
+      <div class="featured-publications">
+        {
+          featuredPublications.map((publication) => (
+            <PublicationCard publication={publication} variant="featured" />
+          ))
+        }
+      </div>
+      <p class="equal-note"><sup>*</sup> Equal contribution</p>
+    </div>
+  </section>
+
+  <section class="section shell">
+    <SectionHeading
+      eyebrow="Open source"
+      title="Research that ships."
+      description="Contributions to widely used training, adaptation, and interpretable-ML tooling."
+      actionLabel="See all contributions"
+      actionHref="/research/#open-source"
+    />
+
+    <div class="oss-grid">
+      {
+        openSourceContributions.slice(0, 3).map((contribution) => (
+          <OpenSourceCard contribution={contribution} />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section section--ink">
+    <div class="shell news-layout">
+      <div>
+        <p class="eyebrow eyebrow--light">Updates</p>
+        <h2>Recent milestones</h2>
+        <p class="news-intro">
+          Selected publications, role changes, and research releases.
+        </p>
+      </div>
+      <ol class="news-list">
+        {
+          news.slice(0, 5).map((item) => (
+            <li>
+              <time datetime={item.date}>{item.displayDate}</time>
+              <p>
+                {item.href ? (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer">
+                    {item.text}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  item.text
+                )}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section shell bio-layout">
+    <div>
+      <p class="eyebrow">About</p>
+      <h2>Research depth, applied at scale.</h2>
+    </div>
+    <div class="bio-copy">
+      <p>
+        I am an Applied Scientist 2 at Microsoft, where I work on adapting and
+        distilling language models for product applications. Previously, as a Research
+        Fellow at Microsoft Research India, I studied cross-lingual transfer, continual
+        learning, multilingual PEFT, and evaluation with Dr. Sunayana Sitaram.
+      </p>
+      <p>
+        My earlier work spans American Express AI Labs, AI4Bharat, the University of
+        Utah, and IIT Delhi. I earned my B.Tech. from Delhi Technological University in
+        2021.
+      </p>
+      <div class="bio-links">
+        <a class="text-link" href="/experience/">View experience <span aria-hidden="true">→</span></a>
+        <a class="text-link" href={`mailto:${site.email}`}>Start a conversation <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

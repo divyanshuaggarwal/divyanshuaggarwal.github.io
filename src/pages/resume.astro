@@ -1,0 +1,171 @@
+---
+import {
+  academicExperience,
+  academicService,
+  capabilityGroups,
+  professionalExperience,
+} from "@/data/experience";
+import { openSourceContributions } from "@/data/openSource";
+import { publications } from "@/data/publications";
+import { site } from "@/data/site";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Resume"
+  description="Resume of Divyanshu Aggarwal, Applied Scientist 2 at Microsoft and NLP researcher working on LLM adaptation, multilingual learning, and evaluation."
+  path="/resume/"
+>
+  <div class="resume-toolbar shell">
+    <p>Web resume · Optimized for screen readers and printing</p>
+    <button class="button button--secondary" type="button" data-print-resume>
+      Print or save as PDF
+      <span aria-hidden="true">↗</span>
+    </button>
+  </div>
+
+  <article class="resume-document" aria-labelledby="resume-name">
+    <header class="resume-header">
+      <div>
+        <p class="resume-role">Applied Scientist 2 · Microsoft</p>
+        <h1 id="resume-name">{site.name}</h1>
+        <p class="resume-summary">
+          Applied scientist and NLP researcher working on efficient language-model
+          adaptation and distillation, multilingual and continual learning, and
+          evaluation at scale.
+        </p>
+      </div>
+      <address>
+        <ul class="resume-contact">
+          <li>{site.location}</li>
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li><a href="https://www.linkedin.com/in/divyanshu-aggarwal-498894163/">LinkedIn</a></li>
+          <li><a href="https://scholar.google.com/citations?user=WuYKZLAAAAAJ">Google Scholar</a></li>
+          <li><a href="https://github.com/divyanshuaggarwal">GitHub</a></li>
+        </ul>
+      </address>
+    </header>
+
+    <div class="resume-grid">
+      <div class="resume-main">
+        <section class="resume-section" aria-labelledby="resume-experience">
+          <h2 id="resume-experience">Professional experience</h2>
+          {
+            professionalExperience.slice(0, 3).map((entry) => (
+              <article class="resume-entry">
+                <div class="resume-entry-heading">
+                  <div>
+                    <h3>{entry.role}</h3>
+                    <p>
+                      {entry.href ? <a href={entry.href}>{entry.organization}</a> : entry.organization}
+                      {entry.team && <span> · {entry.team}</span>}
+                    </p>
+                  </div>
+                  <p>{entry.period}</p>
+                </div>
+                <p>{entry.summary}</p>
+                <ul>
+                  {entry.highlights.map((highlight) => <li>{highlight}</li>)}
+                </ul>
+              </article>
+            ))
+          }
+        </section>
+
+        <section class="resume-section" aria-labelledby="resume-publications">
+          <h2 id="resume-publications">Publications</h2>
+          <ol class="resume-publications">
+            {
+              publications.map((publication) => (
+                <li>
+                  <p>
+                    <a href={publication.links[0]?.href}>{publication.title}</a>
+                  </p>
+                  <p class="resume-authors">
+                    {publication.authors.map((publicationAuthor, index) => (
+                      <>
+                        {index > 0 && ", "}
+                        {publicationAuthor.self ? (
+                          <strong>{publicationAuthor.name}</strong>
+                        ) : (
+                          publicationAuthor.name
+                        )}
+                        {publicationAuthor.equalContribution && <sup>*</sup>}
+                      </>
+                    ))}
+                  </p>
+                  <p>{publication.venueShort}</p>
+                </li>
+              ))
+            }
+          </ol>
+          <p class="resume-footnote"><sup>*</sup> Equal contribution</p>
+        </section>
+      </div>
+
+      <aside class="resume-sidebar" aria-label="Additional resume details">
+        <section class="resume-section" aria-labelledby="resume-education">
+          <h2 id="resume-education">Education</h2>
+          <h3>Delhi Technological University</h3>
+          <p>Bachelor of Technology</p>
+          <p>2017–2021 · Delhi, India</p>
+        </section>
+
+        <section class="resume-section" aria-labelledby="resume-capabilities">
+          <h2 id="resume-capabilities">Capabilities</h2>
+          {
+            capabilityGroups.map((group) => (
+              <div class="resume-skill-group">
+                <h3>{group.title}</h3>
+                <p>{group.items.join(" · ")}</p>
+              </div>
+            ))
+          }
+        </section>
+
+        <section class="resume-section" aria-labelledby="resume-open-source">
+          <h2 id="resume-open-source">Open source</h2>
+          <ul class="resume-compact-list">
+            {
+              openSourceContributions.map((contribution) => (
+                <li>
+                  <a href={contribution.contributions[0]?.href}>{contribution.project}</a>
+                  <span> — {contribution.description}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <section class="resume-section" aria-labelledby="resume-academic">
+          <h2 id="resume-academic">Academic research</h2>
+          <ul class="resume-compact-list">
+            {
+              academicExperience.map((entry) => (
+                <li>
+                  <strong>{entry.organization}</strong>
+                  <span> · {entry.role}, {entry.period}</span>
+                  <p>{entry.summary}</p>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <section class="resume-section" aria-labelledby="resume-service">
+          <h2 id="resume-service">Academic service</h2>
+          <h3>Conferences</h3>
+          <p>{academicService.conferences.join(" · ")}</p>
+          <h3>Workshops</h3>
+          <p>{academicService.workshops.join(" · ")}</p>
+        </section>
+      </aside>
+    </div>
+  </article>
+
+  <script>
+    document.querySelector("[data-print-resume]")?.addEventListener("click", () => {
+      window.print();
+    });
+  </script>
+</BaseLayout>
