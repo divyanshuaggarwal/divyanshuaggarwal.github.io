@@ -1,0 +1,93 @@
+---
+import OpenSourceCard from "@/components/OpenSourceCard.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import PublicationCard from "@/components/PublicationCard.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import { openSourceContributions } from "@/data/openSource";
+import { publications } from "@/data/publications";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const years = [...new Set(publications.map((publication) => publication.year))];
+const researchSchema = {
+  "@type": "CollectionPage",
+  "@id": "https://divyanshuaggarwal.github.io/research/#page",
+  name: "Research by Divyanshu Aggarwal",
+  url: "https://divyanshuaggarwal.github.io/research/",
+  mainEntity: publications.map((publication) => ({
+    "@type": "ScholarlyArticle",
+    headline: publication.title,
+    datePublished: publication.year.toString(),
+    author: publication.authors.map((publicationAuthor) => ({
+      "@type": "Person",
+      name: publicationAuthor.name,
+    })),
+    sameAs: publication.links[0]?.href,
+  })),
+};
+---
+
+<BaseLayout
+  title="Research"
+  description="Publications and open-source contributions by Divyanshu Aggarwal across multilingual NLP, continual learning, LLM adaptation, and evaluation."
+  path="/research/"
+  structuredData={researchSchema}
+>
+  <PageIntro
+    eyebrow="Research"
+    title="Language models that keep learning."
+    description="My research asks how language models can gain new languages and capabilities efficiently, retain what they already know, and be evaluated across the diversity of real-world use."
+    aside={`${publications.length} publications across ACL, EMNLP, NAACL, EACL, and focused workshops.`}
+  />
+
+  <section class="section section--paper research-index">
+    <div class="shell">
+      <div class="research-note">
+        <p>
+          My recent work concentrates on multilingual adaptation, continual learning,
+          parameter-efficient finetuning, model behavior, and broad evaluation. Earlier
+          work covers multilingual inference, semantic parsing, and computational biology.
+        </p>
+        <p class="equal-note"><sup>*</sup> Equal contribution</p>
+      </div>
+
+      <div class="publication-years">
+        {
+          years.map((year) => (
+            <section class="publication-year" aria-labelledby={`year-${year}`}>
+              <div class="year-heading">
+                <h2 id={`year-${year}`}>{year}</h2>
+                <span>
+                  {publications.filter((publication) => publication.year === year).length
+                    .toString()
+                    .padStart(2, "0")}
+                </span>
+              </div>
+              <div class="publication-list">
+                {publications
+                  .filter((publication) => publication.year === year)
+                  .map((publication) => (
+                    <PublicationCard publication={publication} />
+                  ))}
+              </div>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell" id="open-source">
+    <SectionHeading
+      eyebrow="Open source"
+      title="Contributions to the research stack"
+      description="Merged contributions across continual pretraining, finetuning orchestration, adapters, distributed training, and interpretable modeling."
+    />
+    <div class="oss-grid oss-grid--all">
+      {
+        openSourceContributions.map((contribution) => (
+          <OpenSourceCard contribution={contribution} />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,45 @@
+---
+import { navigation, site } from "@/data/site";
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+const isActive = (href: string) =>
+  href === "/" ? currentPath === "/" : currentPath.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="wordmark" href="/" aria-label={`${site.name}, home`}>
+      <span class="wordmark-mark" aria-hidden="true">{site.shortName}</span>
+      <span class="wordmark-name">{site.name}</span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary navigation">
+      {
+        navigation.map((item) => (
+          <a
+            class:list={["nav-link", { active: isActive(item.href) }]}
+            href={item.href}
+            aria-current={isActive(item.href) ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        class:list={[
+          "nav-link",
+          "resume-link",
+          { active: currentPath.startsWith("/resume") },
+        ]}
+        href={site.resume}
+        aria-current={currentPath.startsWith("/resume") ? "page" : undefined}
+      >
+        Resume
+      </a>
+    </nav>
+  </div>
+</header>

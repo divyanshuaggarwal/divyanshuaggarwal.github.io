@@ -1,0 +1,94 @@
+---
+import ExperienceTimeline from "@/components/ExperienceTimeline.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import {
+  academicExperience,
+  academicService,
+  capabilityGroups,
+  professionalExperience,
+} from "@/data/experience";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Experience"
+  description="Professional and academic experience of Divyanshu Aggarwal across Microsoft, Microsoft Research India, American Express AI Labs, and multilingual NLP collaborations."
+  path="/experience/"
+>
+  <PageIntro
+    eyebrow="Experience"
+    title="From research ideas to working systems."
+    description="I work across the full applied-research loop: framing questions, training and evaluating models, building scalable data workflows, and translating findings into product capabilities."
+    aside="Based in India · Working across research, product, and open-source communities."
+  />
+
+  <section class="section section--paper">
+    <div class="shell">
+      <SectionHeading
+        eyebrow="Industry"
+        title="Professional experience"
+        description="Applied research roles spanning language-model adaptation, multilingual learning, customer-facing NLP, and ML systems."
+      />
+      <ExperienceTimeline entries={professionalExperience} />
+    </div>
+  </section>
+
+  <section class="section shell">
+    <SectionHeading
+      eyebrow="Collaborations"
+      title="Academic research"
+      description="Long-running collaborations in multilingual NLP, natural language inference, semantic parsing, and evaluation."
+    />
+    <ExperienceTimeline entries={academicExperience} compact />
+  </section>
+
+  <section class="section section--sage">
+    <div class="shell">
+      <SectionHeading
+        eyebrow="Capabilities"
+        title="Tools and methods"
+        description="A compact view of the capabilities I use most often; the resume contains the complete technical inventory."
+      />
+      <div class="capability-grid">
+        {
+          capabilityGroups.map((group) => (
+            <article>
+              <h3>{group.title}</h3>
+              <ul>
+                {group.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell education-service">
+    <article>
+      <p class="eyebrow">Education</p>
+      <h2>Delhi Technological University</h2>
+      <p class="education-degree">Bachelor of Technology · 2017–2021</p>
+      <p>
+        Coursework across machine learning, natural language processing, computer
+        vision, probability, algorithms, databases, operating systems, and networks.
+      </p>
+    </article>
+
+    <article>
+      <p class="eyebrow">Academic service</p>
+      <h2>Reviewing & community</h2>
+      <dl class="service-list">
+        <div>
+          <dt>Conferences</dt>
+          <dd>{academicService.conferences.join(" · ")}</dd>
+        </div>
+        <div>
+          <dt>Workshops</dt>
+          <dd>{academicService.workshops.join(" · ")}</dd>
+        </div>
+      </dl>
+    </article>
+  </section>
+</BaseLayout>

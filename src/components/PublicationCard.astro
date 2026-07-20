@@ -1,0 +1,71 @@
+---
+import ExternalArrow from "@/components/ExternalArrow.astro";
+import type { Publication } from "@/data/publications";
+
+interface Props {
+  publication: Publication;
+  variant?: "featured" | "list";
+}
+
+const { publication, variant = "list" } = Astro.props;
+const primaryLink = publication.links[0]?.href;
+---
+
+<article class:list={["publication-card", `publication-card--${variant}`]}>
+  <div class="publication-meta">
+    <span>{publication.venueShort}</span>
+    <span aria-hidden="true">·</span>
+    <span>{publication.year}</span>
+  </div>
+
+  <h3>
+    {
+      primaryLink ? (
+        <a href={primaryLink} target="_blank" rel="noopener noreferrer">
+          {publication.title}
+        </a>
+      ) : (
+        publication.title
+      )
+    }
+  </h3>
+
+  <p class="publication-authors">
+    {
+      publication.authors.map((publicationAuthor, index) => (
+        <>
+          {index > 0 && ", "}
+          {publicationAuthor.self ? (
+            <strong>{publicationAuthor.name}</strong>
+          ) : (
+            publicationAuthor.name
+          )}
+          {publicationAuthor.equalContribution && <sup>*</sup>}
+        </>
+      ))
+    }
+  </p>
+
+  {publication.summary && variant === "featured" && (
+    <p class="publication-summary">{publication.summary}</p>
+  )}
+
+  <div class="publication-footer">
+    <ul class="topic-list" aria-label="Research topics">
+      {publication.topics.map((topic) => <li>{topic}</li>)}
+    </ul>
+
+    <ul class="publication-links" aria-label={`Links for ${publication.title}`}>
+      {
+        publication.links.map((link) => (
+          <li>
+            <a href={link.href} target="_blank" rel="noopener noreferrer">
+              {link.label}
+              <ExternalArrow />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</article>
