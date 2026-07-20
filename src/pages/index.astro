@@ -16,23 +16,19 @@ import profileImage from "@/assets/profile.jpg";
   <section class="hero shell">
     <div class="hero-copy">
       <p class="eyebrow hero-eyebrow">Applied Scientist 2 · Microsoft</p>
-      <h1>
-        Building language models that adapt
-        <em>across languages, domains, and constraints.</em>
-      </h1>
+      <h1>Divyanshu Aggarwal</h1>
       <p class="hero-summary">
-        I’m Divyanshu Aggarwal, an applied scientist and NLP researcher. My work spans
-        efficient model adaptation and distillation, multilingual and continual learning,
-        and rigorous evaluation.
+        I am an applied scientist and NLP researcher working on efficient language-model
+        adaptation and distillation, multilingual and continual learning, and evaluation.
       </p>
 
       <div class="hero-actions">
         <a class="button button--primary" href="/research/">
-          Explore my research
+          Research
           <span aria-hidden="true">→</span>
         </a>
         <a class="button button--secondary" href={site.resume}>
-          Read my resume
+          Resume
           <span aria-hidden="true">→</span>
         </a>
       </div>
@@ -45,43 +41,23 @@ import profileImage from "@/assets/profile.jpg";
         <Image
           src={profileImage}
           alt="Portrait of Divyanshu Aggarwal"
-          width={560}
-          height={747}
+          width={240}
+          height={320}
           format="webp"
           quality={86}
           loading="eager"
           fetchpriority="high"
         />
       </div>
-      <div class="portrait-caption">
-        <span>{site.location}</span>
-        <span>LLM adaptation · Multilingual NLP</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="profile-strip" aria-label="Profile highlights">
-    <div class="shell profile-facts">
-      <div>
-        <strong>10</strong>
-        <span>Research publications</span>
-      </div>
-      <div>
-        <strong>ACL · EMNLP · NAACL</strong>
-        <span>Recent publication venues</span>
-      </div>
-      <div>
-        <strong>5</strong>
-        <span>Open-source projects contributed to</span>
-      </div>
+      <p class="portrait-caption">{site.location}</p>
     </div>
   </section>
 
   <section class="section shell" id="focus">
     <SectionHeading
-      eyebrow="Research focus"
-      title="Teaching models new capabilities—efficiently and responsibly."
-      description="I work across algorithms, evaluation, and systems, with a recurring focus on making language models useful beyond their original languages and training distributions."
+      eyebrow="Current focus"
+      title="Research interests"
+      description="My work combines algorithms, evaluation, and systems for adapting language models beyond their original languages and training distributions."
     />
 
     <div class="theme-grid">
@@ -104,7 +80,7 @@ import profileImage from "@/assets/profile.jpg";
     <div class="shell">
       <SectionHeading
         eyebrow="Selected research"
-        title="Recent work"
+        title="Selected publications"
         description="Research on multilingual adaptation, continual learning, efficient finetuning, and language-model evaluation."
         actionLabel="View all publications"
         actionHref="/research/"
@@ -113,7 +89,7 @@ import profileImage from "@/assets/profile.jpg";
       <div class="featured-publications">
         {
           featuredPublications.map((publication) => (
-            <PublicationCard publication={publication} variant="featured" />
+            <PublicationCard publication={publication} />
           ))
         }
       </div>
@@ -124,7 +100,7 @@ import profileImage from "@/assets/profile.jpg";
   <section class="section shell">
     <SectionHeading
       eyebrow="Open source"
-      title="Research that ships."
+      title="Selected contributions"
       description="Contributions to widely used training, adaptation, and interpretable-ML tooling."
       actionLabel="See all contributions"
       actionHref="/research/#open-source"
@@ -139,14 +115,11 @@ import profileImage from "@/assets/profile.jpg";
     </div>
   </section>
 
-  <section class="section section--ink">
+  <section class="section">
     <div class="shell news-layout">
       <div>
-        <p class="eyebrow eyebrow--light">Updates</p>
-        <h2>Recent milestones</h2>
-        <p class="news-intro">
-          Selected publications, role changes, and research releases.
-        </p>
+        <p class="eyebrow">Updates</p>
+        <h2>News</h2>
       </div>
       <ol class="news-list">
         {
@@ -173,7 +146,7 @@ import profileImage from "@/assets/profile.jpg";
   <section class="section shell bio-layout">
     <div>
       <p class="eyebrow">About</p>
-      <h2>Research depth, applied at scale.</h2>
+      <h2>About</h2>
     </div>
     <div class="bio-copy">
       <p>
