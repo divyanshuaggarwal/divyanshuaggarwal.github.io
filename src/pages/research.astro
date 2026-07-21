@@ -1,9 +1,6 @@
 ---
-import OpenSourceCard from "@/components/OpenSourceCard.astro";
 import PageIntro from "@/components/PageIntro.astro";
 import PublicationCard from "@/components/PublicationCard.astro";
-import SectionHeading from "@/components/SectionHeading.astro";
-import { openSourceContributions } from "@/data/openSource";
 import { publications } from "@/data/publications";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
@@ -28,12 +25,12 @@ const researchSchema = {
 
 <BaseLayout
   title="Research"
-  description="Publications and open-source contributions by Divyanshu Aggarwal across multilingual NLP, continual learning, LLM adaptation, and evaluation."
+  description="Publications by Divyanshu Aggarwal across multilingual NLP, continual learning, LLM adaptation, and evaluation."
   path="/research/"
   structuredData={researchSchema}
 >
   <PageIntro
-    eyebrow="Publications and projects"
+    eyebrow="Publications"
     title="Research"
     description="My work studies how language models can gain new languages and capabilities efficiently, retain existing knowledge, and be evaluated across diverse settings."
     aside={`${publications.length} publications across ACL, EMNLP, NAACL, EACL, and focused workshops.`}
@@ -56,11 +53,6 @@ const researchSchema = {
             <section class="publication-year" aria-labelledby={`year-${year}`}>
               <div class="year-heading">
                 <h2 id={`year-${year}`}>{year}</h2>
-                <span>
-                  {publications.filter((publication) => publication.year === year).length
-                    .toString()
-                    .padStart(2, "0")}
-                </span>
               </div>
               <div class="publication-list">
                 {publications
@@ -76,18 +68,9 @@ const researchSchema = {
     </div>
   </section>
 
-  <section class="section shell" id="open-source">
-    <SectionHeading
-      eyebrow="Open source"
-      title="Open-source contributions"
-      description="Merged contributions across continual pretraining, finetuning orchestration, adapters, distributed training, and interpretable modeling."
-    />
-    <div class="oss-grid oss-grid--all">
-      {
-        openSourceContributions.map((contribution) => (
-          <OpenSourceCard contribution={contribution} />
-        ))
-      }
-    </div>
-  </section>
+  <script>
+    if (window.location.hash === "#open-source") {
+      window.location.replace("/open-source/");
+    }
+  </script>
 </BaseLayout>

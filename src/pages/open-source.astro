@@ -1,0 +1,51 @@
+---
+import OpenSourceCard from "@/components/OpenSourceCard.astro";
+import PageIntro from "@/components/PageIntro.astro";
+import { openSourceContributions } from "@/data/openSource";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const openSourceSchema = {
+  "@type": "CollectionPage",
+  "@id": "https://divyanshuaggarwal.github.io/open-source/#page",
+  name: "Open-source contributions by Divyanshu Aggarwal",
+  url: "https://divyanshuaggarwal.github.io/open-source/",
+  mainEntity: openSourceContributions.map((contribution) => ({
+    "@type": "SoftwareSourceCode",
+    name: contribution.project,
+    codeRepository: contribution.repository,
+    description: contribution.description,
+    dateModified: contribution.year.toString(),
+    contributor: {
+      "@type": "Person",
+      "@id": "https://divyanshuaggarwal.github.io/#person",
+      name: "Divyanshu Aggarwal",
+    },
+  })),
+};
+---
+
+<BaseLayout
+  title="Open Source"
+  description="Open-source contributions by Divyanshu Aggarwal across continual pretraining, language-model finetuning, adapters, distributed training, and interpretable ML."
+  path="/open-source/"
+  structuredData={openSourceSchema}
+>
+  <PageIntro
+    eyebrow="Engineering contributions"
+    title="Open source"
+    description="I contribute practical improvements to language-model training, adaptation, and interpretable-ML tooling. Each entry links to the merged pull request."
+    aside="Work across continual pretraining, finetuning orchestration, adapters, distributed training, and interpretable modeling."
+  />
+
+  <section class="section section--paper open-source-index">
+    <div class="shell">
+      <div class="oss-grid oss-grid--all">
+        {
+          openSourceContributions.map((contribution) => (
+            <OpenSourceCard contribution={contribution} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

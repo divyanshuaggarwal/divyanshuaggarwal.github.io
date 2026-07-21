@@ -78,8 +78,31 @@ const jsonLd = {
     <meta name="generator" content={Astro.generator} />
     <meta name="author" content={site.name} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f3efe6" />
-    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#f7f4ee" data-theme-color />
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline>
+      (() => {
+        let storedTheme = null;
+        try {
+          storedTheme = localStorage.getItem("site-theme");
+        } catch (error) {
+          console.warn("Unable to read the saved color theme.", error);
+        }
+
+        const theme =
+          storedTheme === "light" || storedTheme === "dark"
+            ? storedTheme
+            : window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        document
+          .querySelector("meta[data-theme-color]")
+          ?.setAttribute("content", theme === "dark" ? "#22272e" : "#f7f4ee");
+      })();
+    </script>
 
     <title>{pageTitle}</title>
     <link rel="canonical" href={canonical} />

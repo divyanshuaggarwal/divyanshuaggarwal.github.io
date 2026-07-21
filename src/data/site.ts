@@ -46,5 +46,6 @@ export const site = {
 export const navigation = [
   { label: "Home", href: "/" },
   { label: "Research", href: "/research/" },
+  { label: "Open Source", href: "/open-source/" },
   { label: "Experience", href: "/experience/" },
 ];
