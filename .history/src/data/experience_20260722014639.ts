@@ -150,7 +150,7 @@ export const capabilityGroups = [
 ];
 
 export const academicService = {
-  conferences: ["EMNLP 2024", "NAACL 2024", "ACL 2025", "EMNLP 2026"],
+  conferences: ["EMNLP 2024", "NAACL 2024"],
   workshops: [
     "NLP4ConvAI @ ACL 2024",
     "ACM AIMLSys Workshop 2023",

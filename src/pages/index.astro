@@ -15,7 +15,7 @@ import profileImage from "@/assets/profile.jpg";
 <BaseLayout>
   <section class="hero shell">
     <div class="hero-copy">
-      <p class="eyebrow hero-eyebrow">Applied Scientist 2 · Microsoft</p>
+      <p class="hero-role">Applied Scientist 2 at Microsoft</p>
       <h1>Divyanshu Aggarwal</h1>
 
       <div class="hero-actions">
@@ -104,7 +104,6 @@ import profileImage from "@/assets/profile.jpg";
 
   <section class="section shell" id="focus">
     <SectionHeading
-      eyebrow="Current focus"
       title="Research interests"
       description="My work combines algorithms, evaluation, and systems for adapting language models beyond their original languages and training distributions."
     />
@@ -113,7 +112,6 @@ import profileImage from "@/assets/profile.jpg";
       {
         researchThemes.map((theme) => (
           <article class="theme-card">
-            <p class="theme-number">{theme.number}</p>
             <h3>{theme.title}</h3>
             <p>{theme.description}</p>
             <ul class="theme-keywords" aria-label={`${theme.title} topics`}>
@@ -128,7 +126,6 @@ import profileImage from "@/assets/profile.jpg";
   <section class="section section--paper">
     <div class="shell">
       <SectionHeading
-        eyebrow="Selected research"
         title="Selected publications"
         description="Research on multilingual adaptation, continual learning, efficient finetuning, and language-model evaluation."
         actionLabel="View all publications"
@@ -148,11 +145,10 @@ import profileImage from "@/assets/profile.jpg";
 
   <section class="section shell">
     <SectionHeading
-      eyebrow="Open source"
       title="Selected contributions"
       description="Contributions to widely used training, adaptation, and interpretable-ML tooling."
       actionLabel="See all contributions"
-      actionHref="/research/#open-source"
+      actionHref="/open-source/"
     />
 
     <div class="oss-grid">
@@ -164,15 +160,23 @@ import profileImage from "@/assets/profile.jpg";
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="news">
     <div class="shell news-layout">
       <div>
-        <p class="eyebrow">Updates</p>
         <h2>News</h2>
       </div>
-      <ol class="news-list">
+      <p id="news-scroll-hint" class="sr-only">
+        This list is scrollable. Use the arrow keys or Page Up and Page Down to view
+        older updates.
+      </p>
+      <ol
+        class="news-list"
+        tabindex="0"
+        aria-label="News archive"
+        aria-describedby="news-scroll-hint"
+      >
         {
-          news.slice(0, 5).map((item) => (
+          news.map((item) => (
             <li>
               <time datetime={item.date}>{item.displayDate}</time>
               <p>

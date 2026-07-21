@@ -16,29 +16,121 @@ const isActive = (href: string) =>
       <span class="wordmark-name">{site.name}</span>
     </a>
 
-    <nav class="primary-nav" aria-label="Primary navigation">
-      {
-        navigation.map((item) => (
-          <a
-            class:list={["nav-link", { active: isActive(item.href) }]}
-            href={item.href}
-            aria-current={isActive(item.href) ? "page" : undefined}
-          >
-            {item.label}
-          </a>
-        ))
-      }
-      <a
-        class:list={[
-          "nav-link",
-          "resume-link",
-          { active: currentPath.startsWith("/resume") },
-        ]}
-        href={site.resume}
-        aria-current={currentPath.startsWith("/resume") ? "page" : undefined}
+    <div class="header-actions">
+      <nav class="primary-nav" aria-label="Primary navigation">
+        {
+          navigation.map((item) => (
+            <a
+              class:list={["nav-link", { active: isActive(item.href) }]}
+              href={item.href}
+              aria-current={isActive(item.href) ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          ))
+        }
+        <a
+          class:list={[
+            "nav-link",
+            "resume-link",
+            { active: currentPath.startsWith("/resume") },
+          ]}
+          href={site.resume}
+          aria-current={currentPath.startsWith("/resume") ? "page" : undefined}
+        >
+          Resume
+        </a>
+      </nav>
+
+      <button
+        class="theme-toggle"
+        type="button"
+        data-theme-toggle
+        aria-label="Dark mode"
+        aria-pressed="false"
+        title="Switch to dark mode"
       >
-        Resume
-      </a>
-    </nav>
+        <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          ></path>
+        </svg>
+        <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+          <path
+            d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          ></path>
+        </svg>
+      </button>
+    </div>
   </div>
 </header>
+
+<script>
+  const themeToggle = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
+  const themeColor = document.querySelector<HTMLMetaElement>("meta[data-theme-color]");
+  const colorPreference = window.matchMedia("(prefers-color-scheme: dark)");
+
+  const readStoredTheme = () => {
+    try {
+      return localStorage.getItem("site-theme");
+    } catch (error) {
+      console.warn("Unable to read the saved color theme.", error);
+      return null;
+    }
+  };
+
+  const saveTheme = (theme: "light" | "dark") => {
+    try {
+      localStorage.setItem("site-theme", theme);
+    } catch (error) {
+      console.warn("Unable to save the selected color theme.", error);
+    }
+  };
+
+  const applyTheme = (theme: "light" | "dark", persist = false) => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    themeColor?.setAttribute("content", theme === "dark" ? "#22272e" : "#f7f4ee");
+
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    themeToggle?.setAttribute("title", `Switch to ${nextTheme} mode`);
+    themeToggle?.setAttribute("aria-pressed", String(theme === "dark"));
+
+    if (persist) {
+      saveTheme(theme);
+    }
+  };
+
+  const initialTheme = document.documentElement.dataset.theme;
+  applyTheme(
+    initialTheme === "dark"
+      ? "dark"
+      : initialTheme === "light"
+        ? "light"
+        : colorPreference.matches
+          ? "dark"
+          : "light",
+  );
+
+  themeToggle?.addEventListener("click", () => {
+    const nextTheme =
+      document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    applyTheme(nextTheme, true);
+  });
+
+  colorPreference.addEventListener("change", (event) => {
+    if (readStoredTheme() === null) {
+      applyTheme(event.matches ? "dark" : "light");
+    }
+  });
+</script>

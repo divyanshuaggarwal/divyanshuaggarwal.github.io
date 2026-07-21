@@ -10,27 +10,29 @@ const { contribution } = Astro.props;
 ---
 
 <article class="oss-card">
-  <div class="oss-topline">
-    <p>{contribution.organization}</p>
-    <span>{contribution.year}</span>
+  <div class="oss-meta">
+    <time datetime={String(contribution.year)}>{contribution.year}</time>
+    <span>{contribution.organization}</span>
   </div>
-  <h3>
-    <a href={contribution.repository} target="_blank" rel="noopener noreferrer">
-      {contribution.project}
-      <ExternalArrow />
-    </a>
-  </h3>
-  <p>{contribution.description}</p>
-  <ul class="oss-links" aria-label={`${contribution.project} contributions`}>
-    {
-      contribution.contributions.map((item) => (
-        <li>
-          <a href={item.href} target="_blank" rel="noopener noreferrer">
-            {item.label}
-            <ExternalArrow />
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+  <div class="oss-content">
+    <h3>
+      <a href={contribution.repository} target="_blank" rel="noopener noreferrer">
+        {contribution.project}
+        <ExternalArrow />
+      </a>
+    </h3>
+    <p>{contribution.description}</p>
+    <ul class="oss-links" aria-label={`${contribution.project} contributions`}>
+      {
+        contribution.contributions.map((item) => (
+          <li>
+            <a href={item.href} target="_blank" rel="noopener noreferrer">
+              {item.label}
+              <ExternalArrow />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </article>
