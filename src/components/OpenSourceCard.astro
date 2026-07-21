@@ -14,13 +14,15 @@ const { contribution } = Astro.props;
     <p>{contribution.organization}</p>
     <span>{contribution.year}</span>
   </div>
-  <h3>
-    <a href={contribution.repository} target="_blank" rel="noopener noreferrer">
-      {contribution.project}
-      <ExternalArrow />
-    </a>
-  </h3>
-  <p>{contribution.description}</p>
+  <div class="oss-content">
+    <h3>
+      <a href={contribution.repository} target="_blank" rel="noopener noreferrer">
+        {contribution.project}
+        <ExternalArrow />
+      </a>
+    </h3>
+    <p>{contribution.description}</p>
+  </div>
   <ul class="oss-links" aria-label={`${contribution.project} contributions`}>
     {
       contribution.contributions.map((item) => (

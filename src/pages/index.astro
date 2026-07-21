@@ -172,7 +172,7 @@ import profileImage from "@/assets/profile.jpg";
       </div>
       <ol class="news-list">
         {
-          news.slice(0, 5).map((item) => (
+          news.map((item) => (
             <li>
               <time datetime={item.date}>{item.displayDate}</time>
               <p>

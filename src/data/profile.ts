@@ -61,6 +61,18 @@ export const news: NewsItem[] = [
     href: "https://aclanthology.org/2025.findings-naacl.268/",
   },
   {
+    date: "2025-01",
+    displayDate: "Jan 2025",
+    text: "Our probabilistic-tokenization work was accepted to NAACL 2025 Findings.",
+    href: "https://arxiv.org/abs/2407.03678",
+  },
+  {
+    date: "2025-01",
+    displayDate: "Jan 2025",
+    text: "Our active-forgetting work on cross-lingual transfer was accepted to NAACL 2025.",
+    href: "https://arxiv.org/abs/2410.16168",
+  },
+  {
     date: "2024-08",
     displayDate: "Aug 2024",
     text: "MAPLE appears in ACL 2024 Findings.",
@@ -71,5 +83,44 @@ export const news: NewsItem[] = [
     displayDate: "Jun 2024",
     text: "MEGAVERSE appears at NAACL 2024.",
     href: "https://aclanthology.org/2024.naacl-long.143/",
+  },
+  {
+    date: "2024-05",
+    displayDate: "May 2024",
+    text: "MAPLE was accepted to ACL 2024.",
+    href: "https://arxiv.org/abs/2401.07598",
+  },
+  {
+    date: "2024-03",
+    displayDate: "Mar 2024",
+    text: "MEGAVERSE was accepted to NAACL 2024.",
+    href: "https://arxiv.org/abs/2311.07463",
+  },
+  {
+    date: "2024-01",
+    displayDate: "Jan 2024",
+    text: "The MAPLE preprint is now available.",
+    href: "https://arxiv.org/abs/2401.07598",
+  },
+  {
+    date: "2023-11",
+    displayDate: "Nov 2023",
+    text: "The MEGAVERSE preprint is now available.",
+    href: "https://arxiv.org/abs/2311.07463",
+  },
+  {
+    date: "2023-09",
+    displayDate: "Sep 2023",
+    text: "Joined Microsoft Research India as a Research Fellow with Dr. Sunayana Sitaram.",
+  },
+  {
+    date: "2023-05",
+    displayDate: "May 2023",
+    text: "Our work on inter-bilingual semantic parsing for Indic languages was accepted to the NLP4AI workshop at ACL 2023.",
+  },
+  {
+    date: "2022-10",
+    displayDate: "Oct 2022",
+    text: "IndicXNLI was accepted to EMNLP 2022.",
   },
 ];
