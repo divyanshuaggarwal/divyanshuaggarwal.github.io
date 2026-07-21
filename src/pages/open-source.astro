@@ -37,8 +37,12 @@ const openSourceSchema = {
     aside="Work across continual pretraining, finetuning orchestration, adapters, distributed training, and interpretable modeling."
   />
 
-  <section class="section section--paper open-source-index">
+  <section
+    class="section section--paper open-source-index"
+    aria-labelledby="open-source-contributions"
+  >
     <div class="shell">
+      <h2 id="open-source-contributions" class="sr-only">Contributions</h2>
       <div class="oss-grid oss-grid--all">
         {
           openSourceContributions.map((contribution) => (
